@@ -5,15 +5,26 @@ const apiKey = '86254f4fbb446d010fca3459f33ad107'
 
 let searchHistory = JSON.parse(localStorage.getItem('weatherHistory')) || []
 
-function selectIcon(weatherMain) {
-    if(weatherMain === 'Clear') return "./icons/sun.pgn"
-    if(weatherMain === 'Clouds') return "./icons/cloudy.png"
-    if(weatherMain === 'Rain') return "./icons/rainy.png"
-    if(weatherMain === "Thunderstorm") return "./icons/strom.png"
-    if(weatherMain === 'Snow') return ".icons/snowflake.png"
-
-    return "./icons/cloud.png"
+function getWeatherIcon(mainWeather) {
+    switch (mainWeather) {
+        case 'Clear':
+            return './icons/sun.png'
+            break;
+        case 'Clouds':
+            return './icons/cloudy.png'
+            break;
+        case 'Rain':
+            return './icons/rain.png'
+            break;
+        case 'Thunderstorm':
+            return './icons/thunderstorm.png'
+            break;
+        case 'Snow':
+            return './icons/snow.png'
+            break;
+    }
 }
+
 
 async function getCityWeather(city) {
     try {
@@ -48,14 +59,13 @@ function addToHistory(data) {
 function renderTheInfo(data) {
     const now = new Date();
     const formattedDate = now.toLocaleDateString('es-ES', {
-        weekday: 'long',
-        year: 'numeric',
+        weekday: 'short',
         month: 'long',
-        day: 'numeric'
+        day: '2-digit'
     })
     const formattedTime = now.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })
 
-    const icon = selectIcon(data.weather[0].description)
+    const icon = getWeatherIcon(data.weather[0].main)
 
     const dayName = now.toLocaleDateString('es-ES', {
         weekday: 'long'
@@ -63,16 +73,22 @@ function renderTheInfo(data) {
     information.innerHTML = `
     <div class='info-card'>
 
+    <div class='top-section'>
     <p class='date'>${formattedDate}</p>
     <p class='time'>${formattedTime}</p>
-    <p class= 'city'>${data.name}, ${data.sys.country}</p>
-    <p class='icon'>${icon}</p>
-    <p class='temp'>${data.main.temp}</p>
-    <p class= 'dayName'>${dayName}</p>
-   <p><strong>Humidity:</strong>${data.main.humidity}</p>
-   <p><strong>Wind:</strong>${data.wind.speed}</p>
-   </div>
-    `
+    <p class='city'>${data.name}, ${data.sys.country}</p>
+
+    </div>
+
+    <div class='middle-section'>
+    <img class='icon' src='${icon}'>
+    <p class='temp'>${Math.round(data.main.temp)}°</p>
+    <p class='dayName'>${dayName}</p>
+    
+    </div>
+    
+    </div>
+`
 
 }
 
