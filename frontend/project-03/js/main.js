@@ -25,5 +25,4 @@ async function searchMovie() {
 
 searchBtn.addEventListener("click", searchMovie)
 
-// buscador en tiempo real usando debounce
 movieInput.addEventListener("input", debounce(searchMovie, 600))

@@ -1,6 +1,5 @@
 const API_KEY = 'a01cd372'
-const BASE_URL = 'https://www.omdbapi.com/' // CORREGIDO
-
+const BASE_URL = 'https://www.omdbapi.com/' 
 
 export async function getMovies(movie) {
   try {
