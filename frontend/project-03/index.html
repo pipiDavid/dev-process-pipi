@@ -4,14 +4,20 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Show Movies</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 20px; }
+        #movieInformation div { border: 1px solid #ccc; padding: 10px; margin: 10px 0; display: flex; align-items: center; gap: 10px; }
+        button { cursor: pointer; }
+        img { max-height: 80px; }
+    </style>
 </head>
 <body>
     <h1>Show Movies</h1>
-    <input type="text" id="searchMovie" placeholder="Enter the movieName">
+    <input type="text" id="movieInput" placeholder="Enter the movie name">
     <button id="searchBtn">Search</button>
 
-    <div id="information"></div>
+    <div id="movieInformation"></div>
 
-    <script src="index.js"></script>
+    <script type="module" src="./js/main.js"></script>
 </body>
 </html>
